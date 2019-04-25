@@ -22,7 +22,7 @@ class TodoList extends Component {
 
     render() {
         const todos = this.state.todos.map(todo => (
-            <Todo task={todo.task} />
+            <Todo key={todo.id} task={todo.task} />
         ));
         return (
             <div>
