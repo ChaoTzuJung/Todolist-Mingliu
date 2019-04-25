@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import uuid from 'uuid/v4';
 import Todo from './Todo';
 import NewTodoForm from './NewTodoForm';
 
@@ -20,9 +19,19 @@ class TodoList extends Component {
         })
     }
 
+    removeTodo = id => {
+        this.setState({
+            todos: this.state.todos.filter(todo => todo.id !== id)
+        })
+    }
+
     render() {
         const todos = this.state.todos.map(todo => (
-            <Todo key={todo.id} task={todo.task} />
+            <Todo 
+                key={todo.id} 
+                task={todo.task} 
+                id={todo.id} 
+                removeTodo={this.removeTodo} />
         ));
         return (
             <div>
