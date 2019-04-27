@@ -31,19 +31,6 @@
 	transition:background .2s ease-out;
 }
 
-.new-todo-form button {
-	padding:0 1.3rem;
-	border:none;
-	background:#FF6666;
-	color:white;
-	text-transform:uppercase;
-	font-weight:bold;
-	border:1px solid rgba(255,255,255,.3);
-	margin-left:5px;
-	cursor:pointer;
-	transition:background .2s ease-out;
-}
-
 .new-todo-form button:hover {
 	background:#FF5E5E;
 }

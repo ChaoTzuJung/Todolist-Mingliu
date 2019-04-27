@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Todo from './Todo';
 import SwitchButton from './SwitchButton';
 import NewTodoForm from './NewTodoForm';
@@ -77,18 +77,23 @@ class TodoList extends Component {
                 toggleTodo={this.toggleTodo}
             />
         ))
+        console.log(todoData)
         return (
             <div className="todo-list">
                 <h1>
                     Todo List!<span>Get things done, one item at a time.</span>
                 </h1>
-                <ul>
-                    {todos}
-                </ul>
-                <SwitchButton 
-                    label="Move done items at the end?"
-                    sortTodos={this.sortTodos}
-                />
+                {!this.state.todos[0] ?
+                    <p>Your todo list is empty</p>
+                    :
+                    <Fragment>
+                        <ul>{todos}</ul>
+                        <SwitchButton 
+                            label="Move done items at the end?"
+                            sortTodos={this.sortTodos}
+                        />
+                    </Fragment>
+                }
                 <NewTodoForm createTodo={this.createTodo}/>
             </div>
         )
