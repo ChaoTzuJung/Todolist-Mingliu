@@ -33,3 +33,7 @@ yarn start
 便可在 <http://localhost:3000> 看到本地伺服器
 
 ![todolist](https://i.imgur.com/h3qxJGf.png)
+
+## Contribution
+
+此專案由 [Sawsan](https://codepen.io/saawsan) 的 [Todo List UI with VueJs](https://codepen.io/saawsan/pen/jayzeq?editors=1100) 提供設計
