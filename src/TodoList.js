@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
+import SwitchButton from './SwitchButton';
 import NewTodoForm from './NewTodoForm';
 import "./TodoList.css";
 
@@ -7,7 +8,9 @@ class TodoList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            todos: []
+            todos: [],
+            sortedTodos: [],
+            sortByStatus: false,
         }
     }
 
@@ -49,8 +52,21 @@ class TodoList extends Component {
         })  
     }
 
+    sortTodos = () => {
+        let sortedTodos = [];
+        const doneTodo = this.state.todos.filter(function(todo) { return todo.completed; });
+        const notDoneTodo = this.state.todos.filter(function(todo) { return !todo.completed; });
+        sortedTodos = [...notDoneTodo, ...doneTodo];
+
+        this.setState({
+            sortByStatus: !this.state.sortByStatus,
+            sortedTodos,
+        })
+    }
+
     render() {
-        const todos = this.state.todos.map(todo => (
+        const todoData = this.state.sortByStatus ? this.state.sortedTodos : this.state.todos
+        const todos = todoData.map(todo => (
             <Todo 
                 key={todo.id} 
                 task={todo.task} 
@@ -60,7 +76,7 @@ class TodoList extends Component {
                 updateTodo={this.updateTodo}
                 toggleTodo={this.toggleTodo}
             />
-        ));
+        ))
         return (
             <div className="todo-list">
                 <h1>
@@ -69,6 +85,10 @@ class TodoList extends Component {
                 <ul>
                     {todos}
                 </ul>
+                <SwitchButton 
+                    label="Move done items at the end?"
+                    sortTodos={this.sortTodos}
+                />
                 <NewTodoForm createTodo={this.createTodo}/>
             </div>
         )

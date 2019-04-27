@@ -53,10 +53,13 @@ class Todo extends Component {
         } else {
             result = (
                 <div className="todo">
-                    <li className={this.props.completed ? "todo-task completed" : "todo-task"} onClick={this.handleToggle}>
+                    <li className={this.props.completed ? "todo-task completed" : "todo-task"}>
                         {this.props.task}
                     </li>
                     <div className="todo-buttons">
+                        <button onClick={this.handleToggle}>
+                            <i className={this.props.completed ? "fas fa-check-square" : "far fa-square"} />
+                        </button>
                         <button onClick={this.toggleForm}>
                             <i className="fas fa-pen" />
                         </button>
