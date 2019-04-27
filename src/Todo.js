@@ -38,7 +38,7 @@ class Todo extends Component {
         let result = '';
         if(this.state.isEditing) {
             result = (
-                <div className="todo">
+                <div className={this.props.sortByStatus ? "todo open-switch" : "todo close-switch"}>
                     <form className="todo-edit-form" onSubmit={this.handleUpdated}>
                         <input
                             type="text"
@@ -52,7 +52,7 @@ class Todo extends Component {
             )
         } else {
             result = (
-                <div className="todo">
+                <div className={this.props.sortByStatus ? "todo open-switch" : "todo close-switch"}>
                     <li className={this.props.completed ? "todo-task completed" : "todo-task"}>
                         {this.props.task}
                     </li>

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Todo from './Todo';
 import SwitchButton from './SwitchButton';
 import NewTodoForm from './NewTodoForm';
@@ -11,6 +12,11 @@ class TodoList extends Component {
             todos: [],
             sortedTodos: [],
             sortByStatus: false,
+        }
+
+        this.animationTiming = {
+            enter: 400,
+            exit: 1000
         }
     }
 
@@ -67,17 +73,18 @@ class TodoList extends Component {
     render() {
         const todoData = this.state.sortByStatus ? this.state.sortedTodos : this.state.todos
         const todos = todoData.map(todo => (
-            <Todo 
-                key={todo.id} 
-                task={todo.task} 
-                id={todo.id} 
-                completed={todo.completed}
-                removeTodo={this.removeTodo}
-                updateTodo={this.updateTodo}
-                toggleTodo={this.toggleTodo}
-            />
+            <CSSTransition key={todo.id} classNames="fade" timeout={300} in>
+                <Todo 
+                    key={todo.id} 
+                    task={todo.task}
+                    id={todo.id} 
+                    completed={todo.completed}
+                    removeTodo={this.removeTodo}
+                    updateTodo={this.updateTodo}
+                    toggleTodo={this.toggleTodo}
+                />
+            </CSSTransition>
         ))
-        console.log(todoData)
         return (
             <div className="todo-list">
                 <h1>
@@ -87,7 +94,9 @@ class TodoList extends Component {
                     <p>Your todo list is empty</p>
                     :
                     <Fragment>
-                        <ul>{todos}</ul>
+                        <TransitionGroup component="ul" className="TodoList">
+                            {todos}
+                        </TransitionGroup>
                         <SwitchButton 
                             label="Move done items at the end?"
                             sortTodos={this.sortTodos}

@@ -10,6 +10,7 @@
 	justify-content:space-between;
 	align-items:center;
 	background:rgba(255,255,255,0.1);
+	transition: all 1s;
 }
 
 .todo-task.completed {
